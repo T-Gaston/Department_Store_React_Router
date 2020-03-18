@@ -27,6 +27,7 @@ class Api::DepartmentsController < ApplicationController
     end
   end
 
+
   def destroy
     @department.destroy
   end

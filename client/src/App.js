@@ -8,6 +8,9 @@ import Home from './Components/Home';
 import NoMatch from './Components/NoMatch';
 import Departments from './Components/Departments';
 import DepartmentForm from './Components/DepartmentForm';
+import DepartmentShow from './Components/DepartmentShow';
+import Department from './Components/Department';
+
 
 const App = () => (
   <>
@@ -17,6 +20,7 @@ const App = () => (
         <Route exact path="/" component={Home} />
         <Route exact path="/departments" component={Departments} />
         <Route exact path="/departments/new" component={DepartmentForm} />
+        <Route exact path="/departments/:id" component={Department} />
         <Route component={NoMatch} />
       </Switch>
     </Container>
