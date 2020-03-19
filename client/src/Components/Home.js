@@ -1,8 +1,11 @@
 import React from 'react';
-import { Header, } from "semantic-ui-react";
+import { Container, Image} from "semantic-ui-react";
+import Pic from './banner.jpg'
 
 const Home = () => (
-  <Header as="h1">Home</Header>
+  <Container>
+    <Image src={Pic} size='massive' fluid/>
+  </Container>
 )
 
 export default Home;

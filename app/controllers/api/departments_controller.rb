@@ -3,7 +3,7 @@ class Api::DepartmentsController < ApplicationController
   
   
   def index
-    render json: Department.all
+    render json: Department.getItemsHash
   end
 
   def show

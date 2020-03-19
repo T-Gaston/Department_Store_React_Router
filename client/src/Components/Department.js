@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Header, Segment, } from "semantic-ui-react";
+import { Button, Header, Segment, Icon } from "semantic-ui-react";
 import axios from 'axios';
 import DepartmentForm from './DepartmentForm';
+// import ItemForm from '.ItemForm';
 
 export default class Department extends React.Component {
   state = {
@@ -47,20 +48,46 @@ export default class Department extends React.Component {
     })
   }
   
+  addItem = (departmentId, itemName, ) => {
+    axios
+      .post(`api/departments/${departmentId}/items`, {
+        name: itemName,
+      })
+      .then(res => {
+        console.log(res);
+        const newDepartments = this.state.departments.map(department => {
+          if (department.department_id != departmentId) return department;
+          else return { ...department, items: [...department.items, res.data] };
+        });
+        this.setState({
+          departments: newDepartments
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
   render(){
-    const {name, id} = this.state.department
+    const {name, id, department_id, items} = this.state.department
     return(
       <div>
         <Segment>
           <Header as="h1">{ name }</Header>
+          {/* <h4>{items.map( item => (
+          <div key={item.id}>
+            {`${item.name}`}
+          </div>
+        ))}</h4> */}
+        {/* <ItemForm departmentId={department_id} addItem={addItem} /> */}
         </Segment>
         <br />
         <br />
         <Button 
           color="black" 
           onClick={this.props.history.goBack}>Back</Button>
-        <Button color="red" onClick={() => this.deleteDepartment(id)}>Delete</Button>
+        <Button color="red" onClick={() => this.deleteDepartment(id)}>
+        <Icon name="trash" /></Button>
       <button onClick={this.toggleEditForm}>Edit Department</button>
       { this.state.toggleForm ? (
       <DepartmentForm  {...this.state.department} edit={this.editDepartment} toggle={this.toggleEditForm}/> ) : (<></>)}
