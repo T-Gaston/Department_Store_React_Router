@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_03_18_042514) do
-=======
 ActiveRecord::Schema.define(version: 2020_03_18_040221) do
->>>>>>> 9747ecd36652de17f3260330bb3deefe3676a1cc
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,10 +23,6 @@ ActiveRecord::Schema.define(version: 2020_03_18_040221) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-<<<<<<< HEAD
-    t.string "price"
-=======
->>>>>>> 9747ecd36652de17f3260330bb3deefe3676a1cc
     t.bigint "department_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

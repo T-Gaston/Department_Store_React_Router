@@ -1,9 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import {Segment, Header, Button, Form} from 'semantic-ui-react';
+import DepartmentForm from './DepartmentForm'
 
 export default class Items extends React.Component {
-  state = { items: [], };
+  state = { 
+    items: [],
+    toggleForm: false,
+   };
 
   componentDidMount() {
     const { departmentId } = this.props;
@@ -27,8 +31,22 @@ export default class Items extends React.Component {
         items:newitems
       })
     })
-
   }
+  toggleEditForm = () => {
+    this.setState({toggleForm: !this.state.toggleForm})
+  }
+
+  editItem = (id) => {
+    const { departmentId } = this.props;
+    // const { department} = this.state;
+    axios.put(`/api/departments/${departmentId}/items/${id}`)
+    .then(res => {
+      this.setState({item: res.data })
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
+
   handleChange =(e)=>{
     const name = e.target.name
     const value = e.target.value
@@ -49,7 +67,7 @@ export default class Items extends React.Component {
     })
   }
 
-
+  
   render() {
     const { name, } =this.state 
     return (
@@ -72,6 +90,9 @@ export default class Items extends React.Component {
           <Segment key={`item=${item.id}`}>
             <Header as="h3">{item.name}</Header>
             <Button onClick={() => this.deleteItem(item.id)} color='red'>delete</Button>
+            <button onClick={this.toggleEditForm}>Edit Item</button>
+            { this.state.toggleForm ? (
+          <Form  {...this.state.item} edit={this.editItem} toggle={this.toggleEditForm}/> ) : (<></>)}
           </Segment>
         ))}
       </Segment>

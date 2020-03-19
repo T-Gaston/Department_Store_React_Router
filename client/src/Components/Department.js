@@ -21,32 +21,13 @@ export default class Department extends React.Component {
     })
   }
 
-
-  // deleteDepartment = (id) => {
-  //   //update state here
-  //   //make api call to delete menu
-  //   axios.delete(`/api/departments/${id}`)
-  //     .then((res)=>{
-        
-  //     })
-  //     this.props.history.push('/departments')
-  //     // .catch((err)=>{
-  //     //   console.log(err)
-  //     // })
-  // }
   deleteDepartment = (id) => {
     //update state here
     //make api call to delete menu
     axios.delete(`/api/departments/${id}`)
       .then((res)=>{
-        // const {departments} = this.state;
-        // this.setState({ departments: departments.filter(t => t.id !== id), })
-        // debugger
         this.props.history.push('/departments')
       })
-      // .catch((err)=>{
-      //   console.log(err)
-      // })
   }
   // toggles that piece of state
   toggleEditForm = () => {
