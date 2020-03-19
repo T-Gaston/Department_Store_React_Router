@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Container} from 'semantic-ui-react';
 import Navbar from './Components/Navbar';
@@ -8,14 +7,14 @@ import Home from './Components/Home';
 import NoMatch from './Components/NoMatch';
 import Departments from './Components/Departments';
 import DepartmentForm from './Components/DepartmentForm';
-import DepartmentShow from './Components/DepartmentShow';
 import Department from './Components/Department';
+import styled from 'styled-components';
 
 
 const App = () => (
   <>
     <Navbar />
-    <Container>
+    <Container >
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/departments" component={Departments} />
@@ -25,6 +24,8 @@ const App = () => (
       </Switch>
     </Container>
   </>
-)
+);
+
+
 
 export default App;

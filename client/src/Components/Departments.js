@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import styled from "styled-components";
 
 
 
@@ -20,36 +21,23 @@ export default class Departments extends React.Component {
     })
   }
 
-  deleteDepartment = (id) => {
-    //update state here
-    //make api call to delete menu
-    axios.delete(`/api/departments/${id}`)
-      .then((res)=>{
-        const {departments} = this.state;
-        this.setState({ departments: departments.filter(t => t.id !== id), })
-        this.props.history.push('/departments')
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-  }
-
+ 
   renderDepartments = () => {
     const { departments, deleteDepartment, id} = this.state;
     
     if (departments.length <= 0)
       return <h2>No Departments</h2>
     return departments.map( department => (
-      <Card key={`department-${department.id}`}>
+      <StyledCard key={`department-${department.id}`}>
         <Card.Content>
           <Card.Header> { department.name } </Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <Button as={Link} to={`/departments/${department.id}`} color='blue'>
+          <StyledButton as={Link} to={`/departments/${department.id}`} color='blue'>
             View Department
-          </Button>
+          </StyledButton>
         </Card.Content>
-      </Card>
+      </StyledCard>
     ))
   }
   render (){
@@ -64,3 +52,22 @@ export default class Departments extends React.Component {
     )
   }
 }
+
+const StyledCard = styled(Card) `
+  text-align: center;
+  
+`;
+const StyledButton = styled.div`
+  display: flex;
+  background: lightblue;
+  color: white;
+  padding: 15px 25px;
+  justify-content: center;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: #606060;
+    transition: background 0.2s ease;
+  }
+`;

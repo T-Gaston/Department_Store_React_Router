@@ -2,16 +2,18 @@ import React from 'react';
 import { Button, Header, Segment, Icon } from "semantic-ui-react";
 import axios from 'axios';
 import DepartmentForm from './DepartmentForm';
-// import ItemForm from '.ItemForm';
+import Items from './Items';
 
 export default class Department extends React.Component {
   state = {
     department: {},
     toggleForm: false,
+    items: [],
   }
 
   componentDidMount(){
-    axios.get(`/api/departments/${this.props.match.params.id}`)
+    const department_id = this.props.match.params.id;
+    axios.get(`/api/departments/${department_id}`)
     .then((res) => {
       this.setState({ department: res.data, });
     }).catch((err) => {
@@ -20,19 +22,32 @@ export default class Department extends React.Component {
   }
 
 
+  // deleteDepartment = (id) => {
+  //   //update state here
+  //   //make api call to delete menu
+  //   axios.delete(`/api/departments/${id}`)
+  //     .then((res)=>{
+        
+  //     })
+  //     this.props.history.push('/departments')
+  //     // .catch((err)=>{
+  //     //   console.log(err)
+  //     // })
+  // }
   deleteDepartment = (id) => {
     //update state here
     //make api call to delete menu
     axios.delete(`/api/departments/${id}`)
       .then((res)=>{
-        
+        // const {departments} = this.state;
+        // this.setState({ departments: departments.filter(t => t.id !== id), })
+        // debugger
+        this.props.history.push('/departments')
       })
-      this.props.history.push('/departments')
       // .catch((err)=>{
       //   console.log(err)
       // })
   }
-
   // toggles that piece of state
   toggleEditForm = () => {
     this.setState({toggleForm: !this.state.toggleForm})
@@ -69,24 +84,21 @@ export default class Department extends React.Component {
   };
 
   render(){
-    const {name, id, department_id, items} = this.state.department
+    const {name, id, departmentId, items} = this.state.department
     return(
       <div>
         <Segment>
           <Header as="h1">{ name }</Header>
-          {/* <h4>{items.map( item => (
-          <div key={item.id}>
-            {`${item.name}`}
-          </div>
-        ))}</h4> */}
-        {/* <ItemForm departmentId={department_id} addItem={addItem} /> */}
         </Segment>
+        <br />
+        <br />
+        <Items props departmentId={this.props.match.params.id} />
         <br />
         <br />
         <Button 
           color="black" 
           onClick={this.props.history.goBack}>Back</Button>
-        <Button color="red" onClick={() => this.deleteDepartment(id)}>
+        <Button color="red" onClick={() => this.deleteDepartment(this.props.match.params.id)}>
         <Icon name="trash" /></Button>
       <button onClick={this.toggleEditForm}>Edit Department</button>
       { this.state.toggleForm ? (

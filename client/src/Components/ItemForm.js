@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form } from "semantic-ui-react";
+import styled from 'styled-components';
 
 class ItemForm extends Component {
   state = { name: "" };
@@ -28,11 +29,26 @@ class ItemForm extends Component {
         </Form.Group>
         <Form.Group>
           />
-          <Form.Button content="Submit" />
+          <StyledButton content="Submit" />
         </Form.Group>
       </Form>
     );
   }
 }
+
+const StyledButton = styled(Form.Button)`
+  display: flex;
+  background: lightblue;
+  color: white;
+  padding: 15px 25px;
+  justify-content: center;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: #606060;
+    transition: background 0.2s ease;
+  }
+`;
 
 export default ItemForm;
