@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Header} from 'semantic-ui-react';
+import {Form, Header, Button} from 'semantic-ui-react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -61,23 +61,9 @@ export default class DepartmentForm extends React.Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        <StyledButton color="blue">Submit</StyledButton>
+        <Button color="blue">Submit</Button>
       </Form>
       </div>
     )
   }
 }
-const StyledButton = styled(Form.Button)`
-  display: flex;
-  background: lightblue;
-  color: white;
-  padding: 15px 25px;
-  justify-content: center;
-  transition: background 0.2s ease;
-  cursor: pointer;
-  
-  &:hover {
-    background: #606060;
-    transition: background 0.2s ease;
-  }
-`;
